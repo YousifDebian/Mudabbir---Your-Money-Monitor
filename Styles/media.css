@@ -1,0 +1,106 @@
+/* sm */
+@media screen and (max-width: 480px) {}
+
+/* md */
+@media screen and (max-width: 768px) {
+    :root {
+        font-size: 12px;
+    }
+
+    .layout .sidebar {
+        display: none;
+    }
+
+    .layout {
+        display: grid;
+        grid-template-columns: 1fr  !important;
+        grid-template-areas: "dashboard";
+        height: auto;
+    }
+
+    .layout .dashboard {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .layout .dashboard>* {
+        width: 100%;
+    }
+
+    .layout .dashboard .cards {
+        flex-direction: column;
+    }
+
+    .layout .dashboard .cards>* {
+        width: 100%;
+    }
+
+}
+
+/* lg */
+@media screen and (max-width: 1024px) {
+    .layout .dashboard .card h3{
+        font-size: 1.5rem;
+    }
+}
+
+/* xl */
+@media screen and (max-width: 1280px) {
+    .layout {
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        grid-template-areas: "sidebar dashboard";
+    }
+
+    .layout .sidebar {
+        width: 70px;
+        padding: .75rem;
+        align-items: stretch;
+    }
+
+    .layout .sidebar > *{
+        width: 100%;
+    }
+
+    .layout .sidebar .side-title span {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+    
+    .layout .sidebar .side-links .link {
+        gap: 0;
+        justify-content: center;
+    }
+    .layout .sidebar .quick-actions .acion{
+        padding: .5rem 0;
+    }
+    .layout .sidebar h2,
+    .layout .sidebar h4,
+    .layout .sidebar p,
+    .layout .sidebar h1 {
+        display: none;
+    }
+
+    .layout .dashboard {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas:
+            "profile profile profile profile profile profile"
+            "cards cards cards cards cards cards"
+            "recent-activity recent-activity recent-activity net-income net-income net-income"
+            "recent-activity recent-activity recent-activity net-income net-income net-income"
+            "recent-transactions recent-transactions recent-transactions recent-transactions recent-transactions recent-transactions"
+            "recent-transactions recent-transactions recent-transactions recent-transactions recent-transactions recent-transactions"
+            "recent-transactions recent-transactions recent-transactions recent-transactions recent-transactions recent-transactions"
+            "monthly-bills monthly-bills monthly-bills acc-summary acc-summary acc-summary"
+            "monthly-bills monthly-bills monthly-bills acc-summary acc-summary acc-summary"
+            "balance-overview balance-overview balance-overview pay-methods pay-methods pay-methods"
+            "balance-overview balance-overview balance-overview pay-methods pay-methods pay-methods"
+            "balance-overview balance-overview balance-overview . . .";
+    }
+}
+
+/* xxl */
+@media screen and (max-width: 1536px) {}

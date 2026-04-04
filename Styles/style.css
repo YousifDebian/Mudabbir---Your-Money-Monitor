@@ -1,0 +1,1838 @@
+/***** Global *****/
+:root {
+    font-size: 16px;
+}
+
+html {
+    scroll-behavior: smooth;
+    direction: rtl;
+}
+
+body {
+    margin: 0;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    background-color: #F9FAFB;
+}
+
+body::selection {
+    background-color: #3B82F6;
+    color: white;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dbdbdb;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    cursor: pointer;
+}
+
+/***** End Global *****/
+
+
+/***** layout *****/
+
+.layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-areas: "sidebar dashboard";
+    height: 100vh;
+}
+
+/***** Sidebar *****/ 
+
+.layout .sidebar {
+    grid-area: sidebar;
+    border-left: 1px solid #E5E7EB;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 32px;
+    overflow-y: auto;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+}
+
+.layout .sidebar .side-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.layout .sidebar .side-title span {
+    background-color: #3C3DE2;
+    color: white;
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px lightblue;
+    background-image: linear-gradient(142deg, rgb(99, 99, 253) 0%, rgba(60, 61, 226, 1) 84%);
+}
+
+.layout .sidebar .side-title .title-content h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    color: #101828;
+}
+
+.layout .sidebar .side-title .title-content p {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: #4a5565;
+    margin-top: .25rem;
+}
+
+.layout .sidebar .side-links {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+}
+
+.layout .sidebar .side-links .link {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transition: all .15s;
+    cursor: pointer;
+    align-items: center;
+}
+
+.layout .sidebar .side-links .link:not(.active):hover {
+    background-color: #F9FAFB;
+}
+
+.layout .sidebar .side-links .link span {
+    color: #6A7282;
+}
+
+.layout .sidebar .side-links .link h2 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    color: #4a5565;
+}
+
+.layout .sidebar .side-links .active {
+    background-color: #EFF6FF;
+    border: 1px solid #DBEAFE;
+}
+
+.layout .sidebar .side-links .active span {
+    color: #155DFC;
+}
+
+.layout .sidebar .side-links .active h2 {
+    color: #1447e6;
+}
+
+.layout .sidebar .quick-actions {
+    width: 100%;
+}
+
+.layout .sidebar .quick-actions p {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: #364153;
+    padding: 0 8px;
+    margin-bottom: 1rem;
+}
+
+.layout .sidebar .quick-actions .acion {
+    padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+    transition: all .15s;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.layout .sidebar .quick-actions .acion:hover {
+    transform: translateX(2px);
+    background-color: #FAFAFA;
+}
+
+.layout .sidebar .quick-actions .acion span {
+    width: 40px;
+    height: 40px;
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all .15s;
+}
+
+.layout .sidebar .quick-actions .send-money span {
+    color: #155DFC;
+    background-color: #E9F2FF;
+}
+
+.layout .sidebar .quick-actions .send-money:hover span {
+    background-color: #DBE8FC;
+}
+
+.layout .sidebar .quick-actions .add-money span {
+    color: #00A63E;
+    background-color: #E5F9ED;
+}
+
+.layout .sidebar .quick-actions .add-money:hover span {
+    background-color: #D4F3E1;
+}
+
+.layout .sidebar .quick-actions .pay-bills span {
+    color: #9810FA;
+    background-color: #F6ECFF;
+}
+
+.layout .sidebar .quick-actions .pay-bills:hover span {
+    background-color: #EEDFFC;
+}
+
+.layout .sidebar .quick-actions .invest span {
+    color: #F54900;
+    background-color: #FFF0E6;
+}
+
+.layout .sidebar .quick-actions .invest:hover span {
+    background-color: #FBE4D4;
+}
+
+.layout .sidebar .quick-actions .acion h4 {
+    font-size: .875rem;
+    line-height: 1.3125rem;
+    font-weight: 500;
+    color: #364153;
+    transition: all .15s;
+}
+
+.layout .sidebar .quick-actions .acion:hover h4 {
+    color: #111827;
+}
+
+/***** End Sidebar *****/
+
+
+/***** Main Dashboard *****/  
+
+.layout .dashboard {
+    grid-area: dashboard;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "profile profile profile"
+        "cards cards cards"
+        "recent-activity recent-transactions recent-transactions"
+        "recent-activity recent-transactions recent-transactions"
+        "monthly-bills recent-transactions recent-transactions"
+        "monthly-bills recent-transactions recent-transactions"
+        "balance-overview net-income pay-methods"
+        "balance-overview net-income pay-methods"
+        "balance-overview acc-summary pay-methods"
+        "balance-overview . .";
+    padding: 2rem;
+    gap: 1.25rem;
+}
+
+/***** Profile *****/  
+
+.layout .dashboard .profile {
+    grid-area: profile;
+    padding: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FBFCFE;
+    border-radius: 16px;
+    box-shadow: 0px 2px 3px #E2E2E3;
+    background-image: linear-gradient(90deg, rgba(246, 248, 252, 1) 0%, rgba(255, 255, 255) 50%, rgba(243, 246, 249, 1) 100%);
+    margin-bottom: 1rem;
+}
+
+.layout .dashboard .profile .right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.layout .dashboard .profile .right .logo {
+    background-color: #3C3DE2;
+    color: white;
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px lightblue;
+    background-image: linear-gradient(142deg, rgb(99, 99, 253) 0%, rgba(60, 61, 226, 1) 84%);
+}
+
+.layout .dashboard .profile .right .title h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    color: #101828;
+}
+
+.layout .dashboard .profile .right .title p {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    color: #4a5565;
+    margin-top: .25rem;
+}
+
+.layout .dashboard .profile .right .status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    background-color: #F0FDF4;
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 1px solid #DBFCE7;
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #008236;
+}
+
+.layout .dashboard .profile .right .status .green-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #00C950;
+    animation-name: flashing;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+
+}
+
+@keyframes flashing {
+    0% {
+        background-color: #00C950;
+    }
+
+    50% {
+        background-color: #5BDD8E;
+    }
+
+    100% {
+        background-color: #00C950;
+    }
+}
+
+.layout .dashboard .profile .left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+
+}
+
+.layout .dashboard .profile .left .profile-info {
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    padding: 8px 16px;
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.151);
+    transition: all .15s;
+}
+
+.layout .dashboard .profile .left .profile-info:hover {
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.151);
+}
+
+.layout .dashboard .profile .left .profile-info .acc-details h5 {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #101828;
+}
+
+.layout .dashboard .profile .left .profile-info .acc-details p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .profile .left .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.layout .dashboard .profile .left .profile-img img {
+    width: 100%;
+    display: block;
+}
+
+.layout .dashboard .profile .left span {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #E5E7EB;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    color: #364153;
+    transition: all .15s;
+}
+
+.layout .dashboard .profile .left span:hover {
+    background-color: #F3F4F6;
+}
+
+.layout .dashboard .profile .left .notification {
+    position: relative;
+}
+
+.layout .dashboard .profile .left .notification::after {
+    content: "2";
+    width: 16px;
+    height: 16px;
+    background-color: #FB2C36;
+    border-radius: 50%;
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    top: -5px;
+    left: 70%;
+}
+
+/***** End Profile *****/
+
+
+/***** Cards *****/
+
+.layout .dashboard .cards {
+    grid-area: cards;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.layout .dashboard .card {
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    width: 32%;
+    box-shadow: 0px 2px 3px #E2E2E3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.layout .dashboard .card h2 {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #6a7282;
+    margin-bottom: .5rem;
+}
+
+.layout .dashboard .card h3 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    color: #101828;
+}
+
+.layout .dashboard .card span {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #00a63e;
+    margin-top: .5rem;
+}
+
+.layout .dashboard .card .descending {
+    color: #e7000b;
+}
+
+/***** End Cards *****/
+
+
+/***** Recent Activities *****/  
+
+.layout .dashboard .recent-activity {
+    grid-area: recent-activity;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+}
+
+.layout .dashboard .recent-activity .activity-header {
+    margin-bottom: 1.5rem;
+}
+
+.layout .dashboard .recent-activity .activity-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .recent-activity .activity {
+    padding: .75rem;
+    border-left: 4px solid black;
+    border-radius: 8px;
+    margin-bottom: .75rem;
+    background-color: lightgray;
+    position: relative;
+}
+
+.layout .dashboard .recent-activity .acc-create {
+    background-color: #EFF6FF;
+    border-color: #2B7FFF;
+}
+
+.layout .dashboard .recent-activity .card-add {
+    background-color: #F0FDF4;
+    border-color: #00C950;
+}
+
+.layout .dashboard .recent-activity .activity .type {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1rem;
+}
+
+.layout .dashboard .recent-activity .acc-create .type {
+    color: #2B7FFF;
+}
+
+.layout .dashboard .recent-activity .card-add .type {
+    color: #00C950;
+}
+
+.layout .dashboard .recent-activity .activity .activity-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.layout .dashboard .recent-activity .activity .activity-content .icon {
+    margin-top: .125rem;
+    background-color: lightblue;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+}
+
+.layout .dashboard .recent-activity .acc-create .activity-content .icon {
+    color: #155DFC;
+    background-color: #DBEAFE;
+}
+
+.layout .dashboard .recent-activity .card-add .activity-content .icon {
+    color: #00A63E;
+    background-color: #DBFCE7;
+}
+
+.layout .dashboard .recent-activity .activity .activity-content h3 {
+    font-size: .875rem;
+    font-weight: 700;
+    line-height: 1.25rem;
+    color: #101828;
+    margin-bottom: .25rem;
+}
+
+.layout .dashboard .recent-activity .activity .activity-content p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #4a5565;
+    margin-bottom: .5rem;
+}
+
+.layout .dashboard .recent-activity .activity .activity-content .time {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .recent-activity .activity-footer {
+    padding-top: 1rem;
+    margin-top: .25rem;
+    border-top: 1px solid #F3F4F6;
+    text-align: center;
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #2c5be7;
+    transition: all .15s;
+    cursor: pointer;
+}
+
+.layout .dashboard .recent-activity .activity-footer:hover {
+    color: #1447e6;
+}
+
+/***** End Recent Activities *****/
+
+
+/***** Monthly Bills *****/  
+
+.layout .dashboard .monthly-bills {
+    grid-area: monthly-bills;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+}
+
+.layout .dashboard .monthly-bills .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.layout .dashboard .monthly-bills .header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .monthly-bills .header p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #4c4f55;
+    cursor: pointer;
+}
+
+.layout .dashboard .monthly-bills .header p:hover {
+    color: #101828;
+}
+
+.layout .dashboard .monthly-bills .total {
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.layout .dashboard .monthly-bills .total h3 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 2.25rem;
+    color: #101828;
+}
+
+.layout .dashboard .monthly-bills .total p {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .monthly-bills .bills-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "internet electric"
+        "phone netflix";
+    gap: 14px;
+}
+
+.layout .dashboard .monthly-bills .bills-details .internet {
+    grid-area: internet;
+}
+
+.layout .dashboard .monthly-bills .bills-details .electric {
+    grid-area: electric;
+}
+
+.layout .dashboard .monthly-bills .bills-details .phone {
+    grid-area: phone;
+}
+
+.layout .dashboard .monthly-bills .bills-details .netflix {
+    grid-area: netflix;
+}
+
+.layout .dashboard .monthly-bills .bills-details .bill {
+    background-color: #F9FAFB;
+    border: 1px solid #F3F4F6;
+    border-radius: 12px;
+    padding: .75rem;
+    text-align: center;
+}
+
+.layout .dashboard .monthly-bills .bills-details .bill .icon {
+    background-color: lightblue;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-bottom: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.layout .dashboard .monthly-bills .bills-details .internet .icon {
+    background-color: #DBEAFE;
+    color: #155DFC;
+}
+
+.layout .dashboard .monthly-bills .bills-details .electric .icon {
+    background-color: #FEF9C2;
+    color: #D08700;
+}
+
+.layout .dashboard .monthly-bills .bills-details .phone .icon {
+    background-color: #DBFCE7;
+    color: #00A63E;
+}
+
+.layout .dashboard .monthly-bills .bills-details .netflix .icon {
+    background-color: #FFE2E2;
+    color: #E7000B;
+}
+
+.layout .dashboard .monthly-bills .bills-details .bill .bill-content p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .monthly-bills .bills-details .bill .bill-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #101828;
+}
+
+.layout .dashboard .monthly-bills .bills-details .bill .bill-content span {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+}
+
+.layout .dashboard .monthly-bills .bills-details .internet span {
+    color: #fb2c36;
+}
+
+.layout .dashboard .monthly-bills .bills-details .electric span {
+    color: #f97200;
+}
+
+.layout .dashboard .monthly-bills .bills-details .phone span {
+    color: #00c950;
+}
+
+.layout .dashboard .monthly-bills .bills-details .netflix span {
+    color: #6a7282;
+}
+
+/***** End Monthly Bills *****/
+
+
+/***** Recent Transactions *****/  
+
+.layout .dashboard .recent-transactions {
+    grid-area: recent-transactions;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+}
+
+.layout .dashboard .recent-transactions .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.layout .dashboard .recent-transactions .header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .recent-transactions .header p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #4c4f55;
+    cursor: pointer;
+}
+
+.layout .dashboard .recent-transactions .header p:hover {
+    color: #101828;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 1.5fr 1fr 1fr;
+    border-bottom: 1px solid #F9FAFB;
+    align-items: center;
+    justify-content: center;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .last {
+    border: none;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .table-head {
+    border-bottom: #F3F4F6 1px solid;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .table-head p {
+    padding: .75rem .5rem;
+    color: #364153;
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .user {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    padding: 1rem .5rem;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .user>span,
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .utensils>span {
+    background-color: #FFEDD4;
+    color: #F54900;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .shopping>span {
+    background-color: #DBEAFE;
+    color: #155DFC;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .gas>span {
+    background-color: #FFE2E2;
+    color: #E7000B;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .film>span {
+    background-color: #E0E7FF;
+    color: #4F39F6;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .dumbell>span {
+    background-color: #CEFAFE;
+    color: #0092B8;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .course>span {
+    background-color: #D0FAE5;
+    color: #009966;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .user .user-img img {
+    width: 100%;
+    display: block;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .user .user-details p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #101828;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .user .user-details span {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .tag,
+.layout .dashboard .recent-transactions .transactions-box .row .status {
+    padding: .125rem .625rem;
+    background-color: lightblue;
+    height: 20px;
+    border-radius: 999px;
+    width: fit-content;
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .tag i {
+    margin-left: .25rem;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .income {
+    background-color: #DBFCE7;
+    color: #016630;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .food {
+    background-color: #FFEDD4;
+    color: #9f2d00;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .cart {
+    background-color: #DBEAFE;
+    color: #193cb8;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .users {
+    background-color: #F3E8FF;
+    color: #6e11b0;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .car {
+    background-color: #FFE2E2;
+    color: #9f0712;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .tv {
+    background-color: #E0E7FF;
+    color: #372aac;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .heart {
+    background-color: #CEFAFE;
+    color: #005f78;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .done {
+    background-color: #DBFCE7;
+    color: #016630;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .close {
+    background-color: #FEF9C2;
+    color: #894b00;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .date {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #4a5565;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .amount {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #101828;
+}
+
+.layout .dashboard .recent-transactions .transactions-box .row .plus {
+    color: #00a63e;
+}
+
+/***** End Recent Transactions *****/
+
+
+/***** Balance Overview *****/  
+
+.layout .dashboard .balance-overview {
+    grid-area: balance-overview;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.layout .dashboard .balance-overview .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.layout .dashboard .balance-overview .header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .balance-overview .header p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #4c4f55;
+    cursor: pointer;
+}
+
+.layout .dashboard .balance-overview .header p:hover {
+    color: #101828;
+}
+
+.layout .dashboard .balance-overview .total-balance {
+    padding: 1rem;
+    margin-bottom: .5rem;
+    background-color: #EEF4FF;
+    border: 1px solid #DBEAFE;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.layout .dashboard .balance-overview .total-balance .balance-header h3 {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #155dfc;
+}
+
+.layout .dashboard .balance-overview .total-balance .balance-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+    color: #1c398e;
+}
+
+.layout .dashboard .balance-overview .total-balance .remaining {
+    align-self: flex-end;
+}
+
+.layout .dashboard .balance-overview .total-balance .remaining p {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .balance-overview .total-balance .remaining h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #00a63e;
+}
+
+.layout .dashboard .balance-overview .total-balance .status-bar {
+    width: 100%;
+    margin-top: .75rem;
+}
+
+.layout .dashboard .balance-overview .total-balance .status-bar .bar-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: .25rem;
+}
+
+.layout .dashboard .balance-overview .total-balance .status-bar .bar-header p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 16px;
+    color: #4a5565;
+}
+
+.layout .dashboard .balance-overview .total-balance .status-bar .bar {
+    height: .5rem;
+    border-radius: .5rem;
+    background-color: #E5E7EB;
+    position: relative;
+}
+
+.layout .dashboard .balance-overview .total-balance .status-bar .bar::before {
+    content: "";
+    background-color: #4C71FF;
+    height: .5rem;
+    border-radius: .5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 82.5%;
+}
+
+.layout .dashboard .balance-overview .balance-card {
+    padding: 16px;
+    border: 1px solid rgba(229, 231, 235, 0.8);
+    border-radius: 12px;
+    background-color: #FCFCFD;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    transition: all .15s;
+}
+
+.layout .dashboard .balance-overview .balance-card:hover {
+    background-color: #F5F6F8;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.151);
+    transform: translateY(-1px);
+}
+
+.layout .dashboard .balance-overview .balance-card .card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+}
+
+.layout .dashboard .balance-overview .balance-card .card-header .icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 8px;
+    background-color: lightblue;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.layout .dashboard .balance-overview .entertain .card-header .icon {
+    background-color: #FFEDD4;
+    color: #F54900;
+}
+
+.layout .dashboard .balance-overview .bills .card-header .icon {
+    background-color: #FEE2E2;
+    color: #E7000B;
+}
+
+.layout .dashboard .balance-overview .selfcare .card-header .icon {
+    background-color: #FCE7F3;
+    color: #E60076;
+}
+
+.layout .dashboard .balance-overview .homeneeds .card-header .icon {
+    background-color: #DCFCE7;
+    color: #00A63E;
+}
+
+.layout .dashboard .balance-overview .balance-card .card-header .card-title h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #101828;
+}
+
+.layout .dashboard .balance-overview .balance-card .card-header .card-title p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .balance-overview .balance-card .remaining {
+    align-self: flex-end;
+}
+
+.layout .dashboard .balance-overview .balance-card .remaining h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #101828;
+}
+
+.layout .dashboard .balance-overview .balance-card .remaining span {
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: #166534;
+    padding: .125rem .5rem;
+    height: 16px;
+    border-radius: 16px;
+    background-color: lightcyan;
+}
+
+.layout .dashboard .balance-overview .entertain .remaining span {
+    background-color: #DCFCE7;
+    color: #166534;
+}
+
+.layout .dashboard .balance-overview .bills .remaining span {
+    background-color: #FEE2E2;
+    color: #991b1b;
+}
+
+.layout .dashboard .balance-overview .selfcare .remaining span {
+    background-color: #FEF3C7;
+    color: #92400e;
+}
+
+.layout .dashboard .balance-overview .homeneeds .remaining span {
+    background-color: #DCFCE7;
+    color: #166534;
+}
+
+.layout .dashboard .balance-overview .balance-card .status-bar {
+    width: 100%;
+    margin-top: .5rem;
+}
+
+.layout .dashboard .balance-overview .balance-card .status-bar .bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 8px;
+    background-color: #E5E7EB;
+    position: relative;
+}
+
+.layout .dashboard .balance-overview .balance-card .status-bar .bar::before {
+    content: "";
+    height: .5rem;
+    border-radius: .5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+}
+
+.layout .dashboard .balance-overview .entertain .status-bar .bar::before {
+    background-color: #F54900;
+    width: 50%;
+}
+
+.layout .dashboard .balance-overview .bills .status-bar .bar::before {
+    background-color: #E7000B;
+    width: 100%;
+}
+
+.layout .dashboard .balance-overview .selfcare .status-bar .bar::before {
+    background-color: #E60076;
+    width: 80%;
+}
+
+.layout .dashboard .balance-overview .homeneeds .status-bar .bar::before {
+    background-color: #00A63E;
+    width: 86%;
+}
+
+/***** End Balance Overview *****/
+
+
+/***** Net Income *****/  
+
+.layout .dashboard .net-income {
+    grid-area: net-income;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.layout .dashboard .net-income .space {
+    background-color: transparent;
+    width: 100%;
+    height: 165px;
+}
+
+.layout .dashboard .net-income .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.layout .dashboard .net-income .header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .net-income .header p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #4c4f55;
+    cursor: pointer;
+}
+
+.layout .dashboard .net-income .header p:hover {
+    color: #101828;
+}
+
+.layout .dashboard .net-income .chart-legend {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.layout .dashboard .net-income .chart-legend .green {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+}
+
+.layout .dashboard .net-income .chart-legend .green .green-box {
+    width: 12px;
+    height: 12px;
+    background-color: #10B981;
+}
+
+.layout .dashboard .net-income .chart-legend .red {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+}
+
+.layout .dashboard .net-income .chart-legend .red .red-box {
+    width: 12px;
+    height: 12px;
+    background-color: #EF4444;
+}
+
+.layout .dashboard .net-income .chart-legend p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #64748b;
+}
+
+.layout .dashboard .net-income .lower-box {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.layout .dashboard .net-income .statistics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* align-self: flex-end; */
+    padding-inline: 10px;
+}
+
+.layout .dashboard .net-income .statistics .week {
+    position: relative;
+}
+
+.layout .dashboard .net-income .statistics .week::before {
+    content: "";
+    background-color: #EF4444;
+    width: 16px;
+    height: 45px;
+    position: absolute;
+    bottom: 20px;
+    left: 6px;
+    border-radius: 3px 3px 0 0;
+}
+
+.layout .dashboard .net-income .statistics .week::after {
+    content: "";
+    background-color: #10B981;
+    width: 16px;
+    height: 98px;
+    position: absolute;
+    bottom: 20px;
+    right: 6px;
+    border-radius: 3px 3px 0 0;
+}
+
+.layout .dashboard .net-income .statistics .week p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1.125rem;
+    color: #64748b;
+}
+
+/***** End Net Income *****/
+
+
+/***** Account Summary *****/  
+
+.layout .dashboard .acc-summary {
+    grid-area: acc-summary;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.layout .dashboard .acc-summary .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.layout .dashboard .acc-summary .header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .acc-summary .header p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #4c4f55;
+    cursor: pointer;
+}
+
+.layout .dashboard .acc-summary .header p:hover {
+    color: #101828;
+}
+
+.layout .dashboard .acc-summary .summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #F3F4F6;
+    background-color: #F9FAFB;
+    border-radius: 12px;
+}
+
+.layout .dashboard .acc-summary .summary .icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgreen;
+    border-radius: 8px;
+}
+
+.layout .dashboard .acc-summary .current .icon {
+    background-color: #DBEAFE;
+    color: #155DFC;
+}
+
+.layout .dashboard .acc-summary .saveings .icon {
+    background-color: #DBFCE7;
+    color: #00A63E;
+}
+
+.layout .dashboard .acc-summary .credit .icon {
+    background-color: #F3E8FF;
+    color: #9810FA;
+}
+
+.layout .dashboard .acc-summary .summary .summaty-title h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    color: #101828;
+}
+
+.layout .dashboard .acc-summary .summary .summaty-title p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #6a7282;
+}
+
+.layout .dashboard .acc-summary .summary .balance h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #101828;
+}
+
+.layout .dashboard .acc-summary .credit .balance h2 {
+    color: #e7000b;
+}
+
+/***** End Account Summary *****/
+
+
+/***** Payment Methods *****/  
+
+.layout .dashboard .pay-methods {
+    grid-area: pay-methods;
+    padding: 1.5rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 3px #E2E2E3;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.layout .dashboard .pay-methods .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.layout .dashboard .pay-methods .header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+    color: #101828;
+}
+
+.layout .dashboard .pay-methods .header p {
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    color: #4c4f55;
+    cursor: pointer;
+}
+
+.layout .dashboard .pay-methods .header p:hover {
+    color: #101828;
+}
+
+.layout .dashboard .pay-methods .flip-card {
+    perspective: 1000px;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-box {
+    position: relative;
+    transition: transform .5s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-box {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-front {
+    background-color: lightblue;
+    padding: 1.75rem;
+    color: white;
+    position: relative;
+    border-radius: 12px;
+}
+
+.layout .dashboard .pay-methods .visa-card .flip-card-front {
+    background-color: #372AAC;
+}
+
+.layout .dashboard .pay-methods .mastercard .flip-card-front {
+    background-color: #C70036;
+}
+
+.layout .dashboard .pay-methods .paypal .flip-card-front {
+    background-color: #193CB8;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-front span {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    padding: .375rem .625rem;
+    border-radius: 999px;
+    position: absolute;
+    top: .625rem;
+    left: .75rem;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-front .card-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-header .card-mian-icon {
+    width: 48px;
+    height: 32px;
+    background-color: #5F55BD;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout .dashboard .pay-methods .mastercard .flip-card-front .card-header .card-mian-icon {
+    background-color: #D2335E;
+}
+
+.layout .dashboard .pay-methods .paypal .flip-card-front .card-header .card-mian-icon {
+    background-color: #4763C6;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-mian-icon .card-main-inner {
+    width: 24px;
+    height: 16px;
+    background-color: #9F99D7;
+    border-radius: 4px;
+}
+
+.layout .dashboard .pay-methods .mastercard .flip-card-front .card-mian-icon .card-main-inner {
+    background-color: #E4859E;
+}
+
+.layout .dashboard .pay-methods .paypal .flip-card-front .card-mian-icon .card-main-inner {
+    background-color: #91A1DD;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-header .card-type {
+    height: 30px;
+    font-size: 30px;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-number h2 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    font-family: monospace;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-details p {
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: oklch(93.2% .032 255.585);
+    ;
+}
+
+.layout .dashboard .pay-methods .flip-card-front .card-details h4 {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back {
+    padding: 1rem;
+    background-color: #0C1321;
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    transform: rotateY(180deg);
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .strip {
+    width: 100%;
+    margin-top: .375rem;
+    border-radius: 3px;
+    width: 16rem;
+    height: 2.4375rem;
+    background-color: black;
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(36, 36, 36, 1) 74%);
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .signature>p {
+    font-size: .625rem;
+    font-weight: 600;
+    line-height: .9375rem;
+    color: #ffffff7a;
+    margin: .5rem 0;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .signature-box {
+    width: 100%;
+    height: 30px;
+    background-color: white;
+    padding: .375rem .5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .signature-box p {
+    color: black;
+    font-family: monospace;
+    font-size: .875rem;
+    font-weight: 700;
+    line-height: 1.375rem;
+    color: #000000d9;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .signature-box .scribble {
+    justify-self: stretch;
+    background-color: black;
+    height: 12px;
+    width: 85%;
+    background-image: linear-gradient(90deg, rgba(223, 227, 231, 1) 0%, rgba(200, 203, 205, 1) 50%, rgba(223, 227, 231, 1) 100%);
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .cvv {
+    align-self: flex-end;
+    margin-top: .75rem;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .cvv p {
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1rem;
+    color: #d1d5dc;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .cvv .cvv-box {
+    background-color: white;
+    padding: .5rem .75rem;
+    border-radius: 6px;
+}
+
+.layout .dashboard .pay-methods .flip-card .flip-card-back .cvv .cvv-box h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    color: #111827;
+}
+
+/***** End Payment Methods *****/
+
+
+/***** End Main Dashboard *****/
+
+
+/***** End layout *****/
