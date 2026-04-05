@@ -13,7 +13,7 @@
 
     .layout {
         display: grid;
-        grid-template-columns: 1fr  !important;
+        grid-template-columns: 1fr !important;
         grid-template-areas: "dashboard";
         height: auto;
     }
@@ -37,11 +37,19 @@
         width: 100%;
     }
 
+    .layout .recent-transactions {
+        overflow-x: auto;
+    }
+
+    .layout .recent-transactions .transactions-box {
+        width: 150%;
+    }
+
 }
 
 /* lg */
 @media screen and (max-width: 1024px) {
-    .layout .dashboard .card h3{
+    .layout .dashboard .card h3 {
         font-size: 1.5rem;
     }
 }
@@ -60,7 +68,7 @@
         align-items: stretch;
     }
 
-    .layout .sidebar > *{
+    .layout .sidebar>* {
         width: 100%;
     }
 
@@ -69,14 +77,16 @@
         height: 40px;
         font-size: 12px;
     }
-    
+
     .layout .sidebar .side-links .link {
         gap: 0;
         justify-content: center;
     }
-    .layout .sidebar .quick-actions .acion{
+
+    .layout .sidebar .quick-actions .acion {
         padding: .5rem 0;
     }
+
     .layout .sidebar h2,
     .layout .sidebar h4,
     .layout .sidebar p,
